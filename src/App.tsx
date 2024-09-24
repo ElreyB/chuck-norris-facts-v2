@@ -30,6 +30,7 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const [delayedLoading, setDelayedLoading] = useState<boolean>(true);
 
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -50,7 +51,6 @@ function App() {
         setLoading(false);
       }
     };
-
     fetchData();
   }, []);
 
@@ -58,7 +58,7 @@ function App() {
       if (!loading) {
         const timer = setTimeout(() => {
           setDelayedLoading(false);
-        }, 3000);
+        }, 2000);
         return () => clearTimeout(timer);
       }
     }, [loading]);
@@ -66,8 +66,9 @@ function App() {
     console.log(error)
 
   return (
-      <section className="container flex justify-center max-w-full min-h-100">
-        <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 z-10 relative">
+    <div className="text-center">
+      <section className="container flex justify-center max-w-full bg-gradient-to-b from-blue-50 to-transparent dark:from-blue-900 h-96">
+        <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 min-h-450">
           {delayedLoading ? (
             <div role="status" className="text-center">
               <svg aria-hidden="true" className="inline w-20 h-20 text-gray-200 animate-spin dark:text-gray-600 fill-blue-200" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -82,12 +83,13 @@ function App() {
               <div className="flex flex-col justify-between p-4 leading-normal">
               <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Chuck Norris Facts</h5>
               <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{joke}</p>
-              </div>
+              </div>n
             </div>
             )}
         </div>
-        <div className="bg-gradient-to-b from-blue-50 to-transparent dark:from-blue-900 w-full h-full absolute top-0 left-0 z-0"></div>
       </section>
+      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-8" type="button" onClick={() => window.location.reload()}>new fact</button>
+    </div>
   )
 }
 
